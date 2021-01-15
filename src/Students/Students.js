@@ -15,7 +15,9 @@ function Students() {
 			<h3>Students:</h3>
 			<p>Display a bullet point list of all the `students` in the state.</p>
 			<ul>
-
+				{students.map((student, index) => {
+					return <li key={index}>{student}</li>
+				})}
 			</ul>
 		</div>
 	)

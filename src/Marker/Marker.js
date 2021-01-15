@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './Marker.scss';
+import ReactHtmlParser from 'react-html-parser'; 
+import MarkText from './MarkText/MarkText';
 
 function Marker() {
 
@@ -9,6 +11,12 @@ function Marker() {
 		"Third item",
 		"Fourth special item",
 	]);
+	const [value, setValue]= useState('');
+
+	function myInput(e) {
+		setValue(e.target.value);
+		setItems(items);
+	}
 
 	return (
 		<div className="Marker">
@@ -19,9 +27,13 @@ function Marker() {
 				Apply the marker for <u>all items</u>.
 			</p>
 
-			<input type="text" placeholder="Text to marker..." />
+			<input type="text" placeholder="Text to marker..." value={value} onChange={myInput}/>
 			<ul>
-				{ /* The list should be here */ }
+				{items.map((item, index) => {
+					return (<li key={index}>
+						<MarkText item={item} value={value}/>
+					</li>);
+				})}
 			</ul>
 		</div>
 	)
